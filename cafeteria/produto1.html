@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <script src="arquivo3.js" defer></script>
+    <link rel="stylesheet" href="produto1.css">
+    <title>Coffee & Cats</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+          <button class="image-button" onclick="window.location.href='home.html';">
+            <img src="8aa3aa05-988a-418e-aadc-c7f4ae73d73d-removebg-preview.png" alt="Voltar à Página Inicial">
+        </button>
+            <h1>Coffee & Cats</h1>
+        </div>
+        <nav>
+            <a href="login.html">Login</a>
+            <a href="cadastro.php">Cadastre-se</a>
+            <ion-icon class="icon" name="cart-outline"></ion-icon>
+        </nav>
+    </header>
+
+    <main>
+        <nav class="main-nav">
+            
+            <a href="index2.html">Menu</a>
+    
+            <a href="index5.html">Veja seus amigos felinos</a>
+        </nav>
+
+        <div class="product-page">
+            <main>
+                <img src="b0abf002253bfa018552fc26df5c76a6.jpg" alt="Product Image">
+                <div class="product-details">
+                    <h1>Capuccino com canela</h1>
+                    <p class="price">$15.90</p>
+                    <section class="variations">
+                        <label for="size">Selecione o tamanho do copo</label>
+                        <select name="size" id="size">
+                            <option value="small">Pequeno-150ml</option>
+                            <option value="medium">Médio-300ml</option>
+                            <option value="large">Grande-500ml</option>
+                        </select>
+                    </section>
+                    <section class="quantity">
+                        <label for="quantity">Quantidade</label>
+                        <select name="quantity" id="quantity">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </section>
+                    <div class="buttons">
+                        <button id="addToCart">Adicionar ao Carrinho</button>
+                        <button id="buyNow">Comprar Agora</button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    <script src="script.js"></script>
+    <footer>
+        <p>&copy; 2023 Coffee & Cats</p>
+    </footer>
