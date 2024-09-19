@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
 <body>
     <header>
         <div class="logo">
-          <button class="image-button" onclick="window.location.href='index.html';">
+          <button class="image-button" onclick="window.location.href='home.html';">
             <img src="8aa3aa05-988a-418e-aadc-c7f4ae73d73d-removebg-preview.png" alt="Voltar à Página Inicial">
           </button>
             <h1 class="logo-text">Coffee & Cats</h1>

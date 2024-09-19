@@ -1,167 +1,122 @@
 <?php
-    // print_r($_REQUEST);
-    if(isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['senha']))
-    {
-        // Acessa
-        include_once('config.php');
-        $email = $_POST['email'];
-        $senha = $_POST['senha'];
+$conn = new PDO('mysql:host=localhost;dbname=cafeteria', 'root', '');
 
-        // print_r('Email: ' . $email);
-        // print_r('<br>');
-        // print_r('Senha: ' . $senha);
+// Verificação de erros na conexão
+if (!$conn) {
+  echo "Erro ao conectar ao banco de dados: " . $conn->errorInfo()[2];
+  die();
+}
+// Get product information from AJAX request (replace with actual data retrieval)
+$productId = $_POST['productId'];
+$productName = $_POST['productName'];
+$price = $_POST['price'];
 
-        $sql = "SELECT * FROM `cadastro` WHERE email = '$email' and senha = '$senha'";
-        $result = $conexao->query($sql);
+// Simulate adding to a cart array (replace with database logic)
+$cart = [];
+if (isset($_SESSION['cart'])) {
+  $cart = $_SESSION['cart'];
+}
+$cart[] = [
+  'id' => $productId,
+  'name' => $productName,
+  'price' => $price,
+];
+$_SESSION['cart'] = $cart;
 
-      
+echo "Produto adicionado ao carrinho!";  // Send a success message
 
-        if(mysqli_num_rows($result) >= 1)
-        {
-
-        }
-        else{
-          header('Location: login.html');
-        }
-    }
-    else
-    {
-        // Não acessa
-        header('Location: login.html');
-    }
 ?>
 
+
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <script src="arquivo3.js" defer></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="carrinho.css">
-    <title>Coffee & Cats</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <script src="app.js" async></script>
+    <title>lojinha | </title>
 </head>
 <body>
     <header>
-        <div class="logo">
-          <button class="image-button" onclick="window.location.href='home.html';">
-            <img src="8aa3aa05-988a-418e-aadc-c7f4ae73d73d-removebg-preview.png" alt="Voltar à Página Inicial">
-        </button>
-            <h1>Coffee & Cats</h1>
-        </div>
-        <nav>
-            <a href="login.php">Login</a>
-            <a href="cadastro.php">Cadastro</a>
-            <ion-icon class="icon" name="cart-outline"></ion-icon>
-        </nav>
+        <h1>LOJINHA</h1>
     </header>
-    <main>
-        <div class="page-title">Seu Carrinho</div>
-        <div class="content">
-          <section>
-            <table>
-              <thead>
-                <tr>
-                  <th>Produto</th>
-                  <th>Preço</th>
-                  <th>Quantidade</th>
-                  <th>Total</th>
-                  <th>-</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <div class="product">
-                      <img src="https://picsum.photos/100/120" alt="" />
-                      <div class="info">
-                        <div class="name">Café gelado</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>R$ 12,99</td>
-                  <td>
-                    <div class="qty">
-                      <button><i class="bx bx-minus"></i></button>
-                      <span>2</span>
-                      <button><i class="bx bx-plus"></i></button>
-                    </div>
-                  </td>
-                  <td>R$ 15,99</td>
-                  <td>
-                    <button class="remove"><i class="bx bx-x"></i></button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="product">
-                      <img src="https://picsum.photos/100/120" alt="" />
-                      <div class="info">
-                        <div class="name">Espresso</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>R$ 9,99</td>
-                  <td>
-                    <div class="qty">
-                      <button><i class="bx bx-minus"></i></button>
-                      <span>2</span>
-                      <button><i class="bx bx-plus"></i></button>
-                    </div>
-                  </td>
-                  <td>R$ 9,99</td>
-                  <td>
-                    <button class="remove"><i class="bx bx-x"></i></button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="product">
-                      <img src="https://picsum.photos/100/120" alt="" />
-                      <div class="info">
-                        <div class="name">Biscoito de gatinho</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>R$ 8,99</td>
-                  <td>
-                    <div class="qty">
-                      <button><i class="bx bx-minus"></i></button>
-                      <span>2</span>
-                      <button><i class="bx bx-plus"></i></button>
-                    </div>
-                  </td>
-                  <td>R$ </td>
-                  <td>
-                    <button class="remove"><i class="bx bx-x"></i></button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </section>
-          <aside>
-            <div class="box">
-              <header>Resumo da compra</header>
-              <div class="info">
-                <div><span>Sub-total</span><span>R$ 418</span></div>
-                <div><span>Frete</span><span>Gratuito</span></div>
-                <div>
-                  <button>
-                    Adicionar cupom de desconto
-                    <i class="bx bx-right-arrow-alt"></i>
-                  </button>
-                </div>
-              </div>
-              <footer>
-                <span>Total</span>
-                <span>R$ 418</span>
-              </footer>
+    <section class="contenedor">
+        <!-- Contenedor de elementos -->
+     <div class="contenedor-items">
+            <div class="item">
+                <span class="titulo-item">RM</span>
+                <img src="img/rm2.jpg" alt="" class="img-item">
+                <span class="precio-item">R$15.000</span>
+                <button class="boton-item">COMPRAR</button>
             </div>
-            <button>Finalizar Compra</button>
-          </aside>
+            <div class="item">
+                <span class="titulo-item">Jungkook</span>
+                <img src="img/jungkook.jpg" alt="" class="img-item">
+                <span class="precio-item">R$25.000</span>
+                <button class="boton-item">COMPRAR</button>
+            </div>
+            <div class="item">
+                <span class="titulo-item">Jimin</span>
+                <img src="img/jimin.jpg" alt="" class="img-item">
+                <span class="precio-item">R$35.000</span>
+                <button class="boton-item">COMPRAR</button>
+            </div>
+            <div class="item">
+                <span class="titulo-item">NOVO PRODUTO</span>
+                <img src="img/rm2.jpg" alt="" class="img-item">
+                <span class="precio-item">R$18.000</span>
+                <button class="boton-item">COMPRAR</button>
+            </div>
+            <div class="item">
+                <span class="titulo-item">NOVO PRODUTO</span>
+                <img src="img/rm2.jpg" alt="" class="img-item">
+                <span class="precio-item">R$32.000</span>
+                <button class="boton-item">COMPRAR</button>
+            </div>
+            <div class="item">
+                <span class="titulo-item">NOVO PRODUTO</span>
+                <img src="img/rm2.jpg" alt="" class="img-item">
+                <span class="precio-item">R$18.000</span>
+                <button class="boton-item">COMPRAR</button>
+            </div>
+            <div class="item">
+                <span class="titulo-item">NOVO PRODUTO</span>
+                <img src="img/rm2.jpg" alt="" class="img-item">
+                <span class="precio-item">R$54.000</span>
+                <button class="boton-item">COMPRAR</button>
+            </div>
+            <div class="item">
+                <span class="titulo-item">NOVO PRODUTO</span>
+                <img src="img/rm2.jpg" alt="" class="img-item">
+                <span class="precio-item">R$32.000</span>
+                <button class="boton-item">COMPRAR</button>
+            </div>
+            
         </div>
-      </main>
-      <footer>
-        <p>&copy; 2023 Coffee & Cats</p>
-    </footer>
-    </body>
-  </html>
+       
+    
+        <!-- Carrinho de Compras -->
+        <div class="carrito" id="carrito">
+            <div class="header-carrito">
+                <h2>SEU CARRINHO</h2>
+            </div>
+
+            <div class="carrito-items">
+               <!-- Carrinho de compras visivel -->
+            </div>
+            <div class="carrito-total">
+                <div class="fila">
+                    <strong>Total das compras</strong>
+                    <span class="carrito-precio-total">
+                        R$120.000,00
+                    </span>
+                </div>
+                <button class="btn-pagar">Pagar <i class="fa-solid fa-bag-shopping"></i> </button>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
